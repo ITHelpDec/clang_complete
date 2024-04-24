@@ -326,6 +326,20 @@ After running this command, .clang_complete will be created or updated with
 new options. If you don't want to update an existing configuration file,
 delete it before running make.
 
+For modern CMake, we need to use CMAKE_<LANG>_COMPILER_LAUNCHER, e.g. : >
+ cmake -S . -B build \
+ -DCMAKE_BUILD_TYPE=Release \
+ -DCMAKE_C_COMPILER_LAUNCHER=$HOME/.vim/bin/cc_args.py \
+ -DCMAKE_CXX_COMPILER_LAUNCHER=$HOME/.vim/bin/cc_args.py \
+ && cmake --build build
+...for Release builds, or...: >
+ cmake -S . -B debug \
+ -DCMAKE_BUILD_TYPE=Debug \
+ -DCMAKE_C_COMPILER_LAUNCHER=$HOME/.vim/bin/cc_args.py \
+ -DCMAKE_CXX_COMPILER_LAUNCHER=$HOME/.vim/bin/cc_args.py \
+ && cmake --build debug
+...for Debug builds.
+
 ==============================================================================
 8. To do					*clang_complete-todo*
 
